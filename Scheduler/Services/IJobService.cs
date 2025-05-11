@@ -5,8 +5,9 @@ namespace Scheduler.Services
 {
     public interface IJobService
     {
-        void Execute<TJob>(TJob job) where TJob : class, IJob;
+        string FireAndForgotService<TJob>(TJob job) where TJob : class, IJob;
 
-        void ExecuteWithDelay<TJob>(TJob job, TimeSpan time) where TJob : class, IJob;
+        string DelayedJobsService<TJob>(TJob job, TimeSpan time) where TJob : class, IJob;
+        
     }
 }

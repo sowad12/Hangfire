@@ -16,22 +16,21 @@ namespace Scheduler.Services
             _serviceProvider = serviceProvider;
         }
 
-        public void Execute<TJob>(TJob job)
+        public string FireAndForgotService<TJob>(TJob job)
             where TJob : class, IJob
         {
             var type = typeof(IJobExecutor<>).MakeGenericType(typeof(TJob));
             var jobExecutorInstance = _serviceProvider.GetService(type) as IJobExecutor<TJob>;
-            _backgroundJobClient.Enqueue(() => jobExecutorInstance.Execute(job));
+            return _backgroundJobClient.Enqueue(() => jobExecutorInstance.Execute(job));
         }
 
-        public void ExecuteWithDelay<TJob>(TJob job, TimeSpan time)
+        public string DelayedJobsService<TJob>(TJob job, TimeSpan time)
             where TJob : class, IJob
         {
             var type = typeof(IJobExecutor<>).MakeGenericType(typeof(TJob));
             var jobExecutorInstance = _serviceProvider.GetService(type) as IJobExecutor<TJob>;
-            _backgroundJobClient.Schedule(() => jobExecutorInstance.Execute(job), time);
+            return _backgroundJobClient.Schedule(() => jobExecutorInstance.Execute(job), time);
         }
-
-
+       
     }
 }

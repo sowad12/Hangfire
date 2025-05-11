@@ -16,7 +16,7 @@ namespace Main
             Log.Logger = new LoggerConfiguration()
                   .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                   .MinimumLevel.Warning()
-                  .WriteTo.File("Logs/Service.Clubeez.Log.txt", LogEventLevel.Warning,
+                  .WriteTo.File("Logs/Service.Log.txt", LogEventLevel.Warning,
                   flushToDiskInterval: TimeSpan.FromSeconds(1), rollingInterval: RollingInterval.Day)
                   //.WriteTo.Console()
                   .CreateLogger();

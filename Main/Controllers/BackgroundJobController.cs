@@ -16,15 +16,26 @@ namespace Main.Controllers
             _jobService= jobService;
         }
 
-        [HttpPost]
+        [HttpPost("fire-and-forget")]
         public async Task<IActionResult> FireAndForgetJob()
         {
-            _jobService.Execute(new FireAndForgotJob
+            var JobId=_jobService.FireAndForgotService(new FireAndForgotJob
             {
                 Id=Guid.NewGuid(),
                 Name="fireandForgot"
             });
-            return Ok();
+            return Ok(JobId);
+        }
+
+        [HttpPost("delayed")]
+        public async Task<IActionResult> DelayedJob()
+        {
+            var JobId = _jobService.DelayedJobsService(new DelayedJob
+            {
+                Id = Guid.NewGuid(),
+                Name = "delayed"
+            }, TimeSpan.FromMinutes(1));
+            return Ok(JobId);
         }
     }
 }

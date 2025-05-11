@@ -2,11 +2,11 @@
 
 namespace Main.JobExcution.Scheduled
 {
-    public class TestScheduledJobExecutor : IScheduledJobExecutor
+    public class RecurringJobExecutor : IScheduledJobExecutor
     {
     
 
-        public TestScheduledJobExecutor()
+        public RecurringJobExecutor()
         {
           
         }
@@ -25,7 +25,7 @@ namespace Main.JobExcution.Scheduled
 
         public string GetUniqueJobId()
         {
-            return nameof(TestScheduledJobExecutor);
+            return nameof(RecurringJobExecutor);
         }
     }
 }
